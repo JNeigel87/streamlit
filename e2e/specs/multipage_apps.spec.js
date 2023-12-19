@@ -96,4 +96,36 @@ describe("multipage apps", () => {
     // Expand the nav again
     cy.get('[data-testid="stSidebarNavSeparator"] svg').click();
   });
+
+  describe("handles st.switch_page", () => {
+    it("handles st.switch_page with relative path", () => {
+      cy.loadApp("http://localhost:3000");
+
+      // Click the button to trigger st.switch_page
+      cy.get('[data-testid="baseButton-secondary"]').click();
+
+      // Check that we are on the correct page
+      cy.get(".element-container .stMarkdown h2").should("contain", "Page 2");
+    });
+
+    it("handles st.switch_page with relative path & leading /", () => {
+      cy.loadApp("http://localhost:3000/page2");
+
+      // Click the button to trigger st.switch_page
+      cy.get('[data-testid="baseButton-secondary"]').click();
+
+      // Check that we are on the correct page
+      cy.get(".element-container .stMarkdown h2").should("contain", "Page 6");
+    });
+
+    it("handles st.switch_page with relative path & leading ./", () => {
+      cy.loadApp("http://localhost:3000/page_6");
+
+      // Click the button to trigger st.switch_page
+      cy.get('[data-testid="baseButton-secondary"]').click();
+
+      // Check that we are on the correct page
+      cy.get(".element-container .stMarkdown h2").should("contain", "Main Page");
+    });
+  });
 });
