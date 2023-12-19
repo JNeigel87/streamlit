@@ -451,7 +451,7 @@ def run_e2e_tests(
                         [
                             "streamlit",
                             "run",
-                            "--client.showPageNavigation=false",
+                            "--client.showSidebarNavigation=false",
                             test_path,
                         ],
                         show_output=verbose,
